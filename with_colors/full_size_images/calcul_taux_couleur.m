@@ -1,10 +1,10 @@
 
 
-function [taux,num_classe__] = calcul_taux_croped_image(num_classe, comp_train, attributs, nb_bins, rayon, nb_voisinages, mapping)
+function [taux,num_classe__] = calcul_taux_couleur(num_classe, comp_train, attributs, nb_bins, rayon, nb_voisinages, mapping)
     nb_classe = 50;
-    nb_image_par_class = 8;
-    chemin = 'Ressources/Base_croped_images/';
-    nb_ima_train = 4;
+    nb_image_par_class = 12;
+    chemin = '../../Ressources/Base_original_images/';
+    nb_ima_train = 6;
     comp_test = 1;
     compteur = 0;
     num_classe_=zeros(nb_classe*nb_ima_train,1);
@@ -17,7 +17,7 @@ function [taux,num_classe__] = calcul_taux_croped_image(num_classe, comp_train, 
             else
                 fichier_test = [chemin int2str(num_classe_origin) '-' int2str(num_image) '.jpg'];
             end
-            given_image = imread(fichier_test);
+            given_image = rgb2lab(imread(fichier_test));
             lbp_red = lbp(given_image(:,:,1), rayon, nb_voisinages, mapping, 'h');
             lbp_green = lbp(given_image(:,:,2), rayon, nb_voisinages, mapping, 'h');
             lbp_blue = lbp(given_image(:,:,3), rayon, nb_voisinages, mapping, 'h');
@@ -38,5 +38,3 @@ function [taux,num_classe__] = calcul_taux_croped_image(num_classe, comp_train, 
         num_classe__=num_classe_;
 end
 
-
-% image

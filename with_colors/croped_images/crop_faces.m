@@ -1,23 +1,22 @@
 close all;
 clear;
 clc;
-    nb_classe = 50;
-    nb_image_par_class = 12;
-    chemin = '../Ressources/Base_original_images/';
-    chemin_crop = '../Ressources/Base_croped_images/';
+    nb_classes = 50;
+    nb_images_per_class = 12;
+    path = '../../Ressources/Base_original_images/';
+    new_path = '../../Ressources/Base_croped_images/';
     j=1;
-%     num_classe_=zeros(nb_classe*nb_ima_train,1);
-    for i=1:nb_classe * nb_image_par_class
-            num_classe_origin = floor((i-1)/nb_image_par_class) + 1;
+    for i=1:nb_classes * nb_images_per_class
+            num_classe_origin = floor((i-1)/nb_images_per_class) + 1;
             num_image =  mod(i-1,12) + 1;
             
             if(num_image == 1 || num_image == 2 || num_image == 9 || num_image == 10 )
                 continue;
             end
             if(num_image < 10)
-                fichier_test = [chemin int2str(num_classe_origin) '-0' int2str(num_image) '.jpg'];
+                fichier_test = [path int2str(num_classe_origin) '-0' int2str(num_image) '.jpg'];
             else
-                fichier_test = [chemin int2str(num_classe_origin) '-' int2str(num_image) '.jpg'];
+                fichier_test = [path int2str(num_classe_origin) '-' int2str(num_image) '.jpg'];
             end
             given_image = imread(fichier_test);
             faceDetector = vision.CascadeObjectDetector;
@@ -27,7 +26,7 @@ clc;
             else
                 croped_image = imcrop(given_image, bboxes(2,:));
             end
-            chemin_croped_image = [chemin_crop int2str(num_classe_origin) '-0' int2str(j) '.jpg'];
+            chemin_croped_image = [new_path int2str(num_classe_origin) '-0' int2str(j) '.jpg'];
             imwrite(croped_image, chemin_croped_image);
             
             if(num_image == 12)
@@ -35,5 +34,5 @@ clc;
             else
                 j = j + 1;
             end
-            
+            disp('end cropping');
    end

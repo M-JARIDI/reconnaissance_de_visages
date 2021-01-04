@@ -3,7 +3,7 @@
 
 
 
-function [max_distance,returned_image] = ppv(given_image_gray_lbp, comp_train, attributs, nb_bins)
+function [max_distance,returned_image] = ppv_hist_intersection(given_image_gray_lbp, comp_train, attributs, nb_bins)
     S = zeros(comp_train,1);
     for i = 1 : comp_train
         S(i) = hist_intersection(given_image_gray_lbp, attributs(i,:), nb_bins);

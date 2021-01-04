@@ -1,8 +1,4 @@
 
-
-
-
-
 function [max_distance,returned_image] = ppv_manhattan(given_image_gray_lbp, comp_train, attributs, nb_bins)
     S = zeros(comp_train,1);
     for i = 1 : comp_train
@@ -10,7 +6,6 @@ function [max_distance,returned_image] = ppv_manhattan(given_image_gray_lbp, com
     end
     [max_distance,returned_image] = min(S);
 end
-
 
 
 function distance = manhattan(vector_1, vector_2, length)
